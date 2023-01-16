@@ -1,8 +1,11 @@
 package br.inatel.idp.PublicHolidays.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.inatel.idp.PublicHolidays.adapter.HolidayAdapter;
@@ -26,12 +29,28 @@ public class HolidayService {
 		return HolidayMapper.toHolidayDtoLits(holidayList);
 	}
 	
-	public Holiday saveHoliday(HolidayDto holidayDto) {
-		return HolidayMapper.toHoliday(holidayDto);
+	public List<HolidayDto> findHolidayByLocal(String cityName) {
+		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByLocal(cityName));
 	}
 	
-//	public List<HolidayDto> getHolidayByLocal(String cityName){
-//		return HolidayMapper.toHolidayDto(null)
+	public List<HolidayDto> findHolidayByDate(LocalDate date) {
+		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
+	}
+	
+//	public HolidayDto saveHoliday(HolidayDto holidayDto) {
+//        Holiday holiday = HolidayMapper.toHoliday(holidayDto);
+//
+//        if(holidayNotExists(holiday)){
+//            return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+//        }
 //	}
 	
+//	private Boolean holidayNotExists(Holiday holiday){
+//
+//        return holidayAdapter.getAllRecipe(recipeEvaluation.getRecipeId())
+//                .stream()
+//                .anyMatch(results -> results.getResults()[0].getDisplay()
+//                .equals(recipeEvaluation.getRecipeId()));
+//	
+//	
 }

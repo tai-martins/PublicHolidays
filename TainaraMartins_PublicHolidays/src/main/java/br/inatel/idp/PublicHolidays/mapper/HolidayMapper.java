@@ -1,6 +1,7 @@
 package br.inatel.idp.PublicHolidays.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.inatel.idp.PublicHolidays.model.dto.HolidayDto;
@@ -32,4 +33,5 @@ public class HolidayMapper {
 	public static List<HolidayDto> toHolidayDtoLits(List<Holiday>holidayList){
 		return holidayList.stream().map(h -> toHolidayDto(h)).collect(Collectors.toList());
 	}
+
 }
