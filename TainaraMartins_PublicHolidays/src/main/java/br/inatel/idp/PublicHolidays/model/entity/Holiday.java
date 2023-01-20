@@ -28,7 +28,15 @@ public class Holiday {
 	@NotNull
 	private String cityName;
 	@NotNull
+	private String holidayName;
+	@NotNull
 	@JsonFormat(pattern = "YYYY-MM-DD")
     private LocalDate date;
-	
+
+	private String contryCode;
+	private int year;
+
+	public LocalDate getDate() {
+		return date;
+	}
 }

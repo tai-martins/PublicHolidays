@@ -23,5 +23,8 @@ public class PublicHoliday {
 	private ArrayList<String> counties;
 	private ArrayList<String> launchYear;
 	private String type;
-	
+
+	public LocalDate getDate() {
+		return date;
+	}
 }
