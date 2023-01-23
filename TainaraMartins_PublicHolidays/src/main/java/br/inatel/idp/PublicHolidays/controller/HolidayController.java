@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import br.inatel.idp.PublicHolidays.model.form.HolidayForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +37,15 @@ public class HolidayController {
 		return ResponseEntity.ok().body(holidayService.findHolidayByDate(date));
 	}
 	
+//	@PostMapping
+//    public ResponseEntity<HolidayDto> addHoliday(@RequestBody @Valid HolidayDto holidayDto) throws Exception {
+//        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayDto));
+//    }
+
 	@PostMapping
-    public ResponseEntity<HolidayDto> addHoliday(@RequestBody @Valid HolidayDto holidayDto) {
-        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayDto));
-    }
+	public ResponseEntity<?> teste(HolidayForm hForm){
+		return ResponseEntity.ok(holidayService.teste(hForm));
+	}
+
 	
 }

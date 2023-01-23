@@ -2,11 +2,11 @@ package br.inatel.idp.PublicHolidays.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import br.inatel.idp.PublicHolidays.exception.HolidayNotFoundException;
+import br.inatel.idp.PublicHolidays.model.form.HolidayForm;
 import br.inatel.idp.PublicHolidays.model.rest.PublicHoliday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,21 +45,41 @@ public class HolidayService {
 		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
 	}
 
-	public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) {
-		Holiday holiday = HolidayMapper.toHoliday(holidayDto);
-		if(holidayRepository.findByDate(holidayDto.getDate()).isEmpty()) {
-			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-		}else if (holidayExist(holiday)) {
-			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-		}
-		throw new HolidayNotFoundException(holiday);
+//	public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) {
+//		Holiday holiday = HolidayMapper.toHoliday(holidayDto);
+//		if(holidayRepository.findByDate(holidayDto.getDate()).isEmpty()) {
+//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+//		}else if (holidayExist(holiday)) {
+//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+//		}
+//		throw new HolidayNotFoundException(holiday);
+//
+////			return HolidayNotFoundException(holiday);
+//
+//	}
 
-//			return HolidayNotFoundException(holiday);
+//	public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) throws Exception {
+//		Holiday holiday = HolidayMapper.toHoliday(holidayDto);
+//		if(holidayRepository.findByDate(holidayDto.getDate()).isEmpty()) {
+//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+////		}
+////		else if(exist(holiday)){
+////				return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+////			}
+//		throw new HolidayNotFoundException(holiday);
+//
+//	}
+//	public boolean exist(Holiday holiday) {
+//		if(holidayAdapter.getPublicHoliday()
+//				.stream().anyMatch(h -> h.getDate().equals(holiday.getDate()))){
+//			return false;
+//		}
+//			return true;
+//	}
 
-	}
-
-	public boolean holidayExist(Holiday holiday) {
-		List<PublicHoliday> holidayList = holidayAdapter.listAllPublicHolidays(holiday);
-		return holidayList.stream().anyMatch(h -> h.getDate().equals(holiday.getDate()));
+	public List<PublicHoliday> teste(HolidayForm hForm){
+		String year = hForm.getYear();
+		String contry = hForm.getContry();
+		return holidayAdapter.getPublicHoliday(year, contry);
 	}
 }
