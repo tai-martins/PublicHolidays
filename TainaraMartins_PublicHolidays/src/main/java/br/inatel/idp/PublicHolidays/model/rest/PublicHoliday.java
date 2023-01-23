@@ -17,11 +17,7 @@ public class PublicHoliday {
 	private LocalDate date;
 	private String localName;
 	private String name;
-	private String contryCode;
-	private boolean fixed;
-	private boolean global;
-	private ArrayList<String> counties;
-	private ArrayList<String> launchYear;
+	private String countryCode;
 	private String type;
 
 	public LocalDate getDate() {

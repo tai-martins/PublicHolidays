@@ -12,7 +12,7 @@ public class HolidayMapper {
 		Holiday holiday = Holiday.builder()
 				.id(holidayDto.getId())
 				.year(holidayDto.getYear())
-				.contryCode(holidayDto.getContryCode())
+				.contryCode(holidayDto.getCountryCode())
 				.cityName(holidayDto.getCityName())
 				.holidayName(holidayDto.getHolidayName())
 				.date(holidayDto.getDate())
@@ -27,7 +27,7 @@ public class HolidayMapper {
 	public static HolidayDto toHolidayDto(Holiday holiday) {
 		HolidayDto holidayDto = HolidayDto.builder()
 				.id(holiday.getId())
-				.contryCode(holiday.getContryCode())
+				.countryCode(holiday.getContryCode())
 				.year(holiday.getYear())
 				.cityName(holiday.getCityName())
 				.holidayName(holiday.getHolidayName())

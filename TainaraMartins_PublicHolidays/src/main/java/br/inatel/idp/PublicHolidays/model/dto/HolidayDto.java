@@ -17,7 +17,7 @@ public class HolidayDto {
 	private String cityName;
 	private String holidayName;
 	private LocalDate date;
-	private String contryCode;
+	private String countryCode;
 	private String year;
 
 	public LocalDate getDate() {

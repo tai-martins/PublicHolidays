@@ -27,7 +27,7 @@ public class HolidayAdapter {
 	@Value("${X-RapidAPI-Host}")
 	private String holidayHost;
 
-	@Value("${X-RapidAPI-URL")
+	@Value("${X-RapidAPI-URL}")
 	private String url;
 
 	@Value("${X_RapidApi_Key}")
@@ -35,8 +35,9 @@ public class HolidayAdapter {
 
 	public List<PublicHoliday> getPublicHoliday(String year, String contry){
 			try {
-				PublicHoliday[] pholidays = WebClient.builder().baseUrl(url+year+"/"+contry)
+				PublicHoliday[] pholidays = WebClient.builder().baseUrl(url)
 						.build().get()
+						.uri(year+"/"+contry)
 						.header("X-RapidAPI-Key", key)
 						.header("X-RapidAPI-Host", holidayHost)
 						.accept(MediaType.APPLICATION_JSON)

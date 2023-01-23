@@ -2,6 +2,7 @@ package br.inatel.idp.PublicHolidays.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -45,41 +46,25 @@ public class HolidayService {
 		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
 	}
 
-//	public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) {
-//		Holiday holiday = HolidayMapper.toHoliday(holidayDto);
-//		if(holidayRepository.findByDate(holidayDto.getDate()).isEmpty()) {
-//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-//		}else if (holidayExist(holiday)) {
-//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-//		}
-//		throw new HolidayNotFoundException(holiday);
+//	public HolidayDto saveHoliday(@Valid HolidayForm holidayForm) throws Exception {
 //
-////			return HolidayNotFoundException(holiday);
 //
 //	}
-
-//	public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) throws Exception {
-//		Holiday holiday = HolidayMapper.toHoliday(holidayDto);
-//		if(holidayRepository.findByDate(holidayDto.getDate()).isEmpty()) {
-//			return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-////		}
-////		else if(exist(holiday)){
-////				return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
-////			}
-//		throw new HolidayNotFoundException(holiday);
-//
-//	}
-//	public boolean exist(Holiday holiday) {
-//		if(holidayAdapter.getPublicHoliday()
-//				.stream().anyMatch(h -> h.getDate().equals(holiday.getDate()))){
+	public boolean exist(HolidayForm holidayForm) {
+		String year = holidayForm.getYear();
+		String country = holidayForm.getCountry();
+		return holidayAdapter.getPublicHoliday(year, country).stream()
+				.anyMatch(h -> h.getDate().equals(holidayForm.getDate()));
+//		if(holidayAdapter.getPublicHoliday(year, country))
+////				.stream().anyMatch(h -> h.getDate().equals(holiday.getDate()))){
 //			return false;
 //		}
 //			return true;
-//	}
-
-	public List<PublicHoliday> teste(HolidayForm hForm){
-		String year = hForm.getYear();
-		String contry = hForm.getContry();
-		return holidayAdapter.getPublicHoliday(year, contry);
 	}
+
+//	public List<PublicHoliday> teste(HolidayForm hForm){
+//		String year = hForm.getYear();
+//		String country = hForm.getCountry();
+//		return holidayAdapter.getPublicHoliday(year, country);
+//	}
 }

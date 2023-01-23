@@ -37,15 +37,15 @@ public class HolidayController {
 		return ResponseEntity.ok().body(holidayService.findHolidayByDate(date));
 	}
 	
-//	@PostMapping
-//    public ResponseEntity<HolidayDto> addHoliday(@RequestBody @Valid HolidayDto holidayDto) throws Exception {
-//        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayDto));
-//    }
-
 	@PostMapping
-	public ResponseEntity<?> teste(HolidayForm hForm){
-		return ResponseEntity.ok(holidayService.teste(hForm));
-	}
+    public ResponseEntity<?> addHoliday(@RequestBody @Valid HolidayForm holidayForm) throws Exception {
+        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayForm));
+    }
+
+//	@PostMapping
+//	public ResponseEntity<?> teste(@RequestBody HolidayForm hForm){
+//		return ResponseEntity.ok(holidayService.teste(hForm));
+//	}
 
 	
 }
