@@ -6,13 +6,12 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import br.inatel.idp.PublicHolidays.model.form.HolidayForm;
+import br.inatel.idp.PublicHolidays.model.entity.Holiday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.inatel.idp.PublicHolidays.model.dto.HolidayDto;
-import br.inatel.idp.PublicHolidays.model.entity.Holiday;
 import br.inatel.idp.PublicHolidays.service.HolidayService;
 
 @RestController
@@ -33,13 +32,13 @@ public class HolidayController {
 	}
 	
 	@GetMapping("/date")
-	public ResponseEntity<List<HolidayDto>> dateHolidays(@RequestParam("date") @PathVariable LocalDate date){
+	public ResponseEntity<List<Holiday>> dateHolidays(@RequestParam("date") @PathVariable LocalDate date){
 		return ResponseEntity.ok().body(holidayService.findHolidayByDate(date));
 	}
 	
 	@PostMapping
-    public ResponseEntity<?> addHoliday(@RequestBody @Valid HolidayForm holidayForm) throws Exception {
-        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayForm));
+    public ResponseEntity<?> addHoliday(@RequestBody @Valid HolidayDto holidayDto) throws Exception {
+        return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayDto));
     }
 
 //	@PostMapping

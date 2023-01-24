@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class Error {
 	
-	private HttpStatus statusCode;
+	private HttpStatus httpStatusCode;
     private String message;
 
 }

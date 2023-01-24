@@ -6,8 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.inatel.idp.PublicHolidays.exception.HolidayNotFoundException;
-import br.inatel.idp.PublicHolidays.model.form.HolidayForm;
-import br.inatel.idp.PublicHolidays.model.rest.PublicHoliday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,37 +34,26 @@ public class HolidayService {
         return HolidayMapper.toHolidayDtoLits(holidayRepository.findByCityName(cityName));
     }
 
-    public List<HolidayDto> findHolidayByDate(LocalDate date) {
-        return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
+    public List<Holiday> findHolidayByDate(LocalDate date) {
+        List<Holiday> list = holidayRepository.findByDate(date);
+        return list;
     }
 
-    public List<HolidayDto> saveHoliday(@Valid HolidayForm holidayForm) throws Exception {
-        List<PublicHoliday> pHoliday = holidayAdapter
-                .getPublicHoliday(holidayForm.getYear(), holidayForm.getCountryCode());
-        List<Holiday> list = holidayRepository.findByDate(holidayForm.getDate());
-        if (exist(holidayForm)) {
-            throw new HolidayNotFoundException(holidayForm);
+    public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) throws Exception {
+        Holiday holiday = HolidayMapper.toHoliday(holidayDto);
+
+        if (exist(holiday)) {
+            throw new HolidayNotFoundException(holiday);
         } else {
-            Holiday holiday = Holiday.builder()
-                    .id(holidayForm.getId())
-                    .year(holidayForm.getYear())
-                    .contryCode(holidayForm.getCountryCode())
-                    .date(holidayForm.getDate())
-                    .cityName(holidayForm.getCity())
-                    .holidayName(holidayForm.getHolidayName())
-                    .build();
-//
-//            holidayRepository.save(holiday);
-//            return HolidayMapper.toHolidayDto(holiday);
             return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
         }
     }
 
-    public boolean exist(HolidayForm holidayForm) {
-        String year = holidayForm.getYear();
-        String country = holidayForm.getCountryCode();
+    public boolean exist(Holiday holiday) {
+        String year = holiday.getYear();
+        String country = holiday.getCountryCode();
         return holidayAdapter.getPublicHoliday(year, country).stream()
-                .anyMatch(h -> h.getDate().equals(holidayForm.getDate()));
+                .anyMatch(h -> h.getDate().equals(holiday.getDate()));
     }
 
 //	public List<PublicHoliday> teste(HolidayForm hForm){

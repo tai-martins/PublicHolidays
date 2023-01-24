@@ -33,7 +33,7 @@ public class Holiday {
 	@JsonFormat(pattern = "YYYY-MM-DD")
     private LocalDate date;
 
-	private String contryCode;
+	private String countryCode;
 	private String year;
 
 	public LocalDate getDate() {
