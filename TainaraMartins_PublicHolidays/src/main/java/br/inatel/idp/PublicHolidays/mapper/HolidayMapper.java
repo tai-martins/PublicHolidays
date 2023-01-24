@@ -18,8 +18,6 @@ public class HolidayMapper {
 				.date(holidayDto.getDate())
 				.build();
 
-
-
 		return holiday;
 	
 	}

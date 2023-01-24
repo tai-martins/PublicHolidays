@@ -2,7 +2,6 @@ package br.inatel.idp.PublicHolidays.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,44 +22,52 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HolidayService {
 
-	@Autowired
-	private HolidayRepository holidayRepository;
-	@Autowired
-	private HolidayAdapter holidayAdapter;
+    @Autowired
+    private HolidayRepository holidayRepository;
+    @Autowired
+    private HolidayAdapter holidayAdapter;
 
-	public List<HolidayDto> findHoliday() {
-		List<Holiday> holidayList = holidayRepository.findAll();
-		return HolidayMapper.toHolidayDtoLits(holidayList);
-	}
-	
-	public List<HolidayDto> findHolidayByLocal(String cityName) {
-		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByCityName(cityName));
-	}
+    public List<HolidayDto> findHoliday() {
+        List<Holiday> holidayList = holidayRepository.findAll();
+        return HolidayMapper.toHolidayDtoLits(holidayList);
+    }
 
-//	public HolidayDto findHolidayByDate(LocalDate date){
-//		Optional<Holiday> opHoliday = holidayRepository.findByDate(date);
-//
-//	}
-	
-	public List<HolidayDto> findHolidayByDate(LocalDate date) {
-		return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
-	}
+    public List<HolidayDto> findHolidayByLocal(String cityName) {
+        return HolidayMapper.toHolidayDtoLits(holidayRepository.findByCityName(cityName));
+    }
 
-//	public HolidayDto saveHoliday(@Valid HolidayForm holidayForm) throws Exception {
+    public List<HolidayDto> findHolidayByDate(LocalDate date) {
+        return HolidayMapper.toHolidayDtoLits(holidayRepository.findByDate(date));
+    }
+
+    public List<HolidayDto> saveHoliday(@Valid HolidayForm holidayForm) throws Exception {
+        List<PublicHoliday> pHoliday = holidayAdapter
+                .getPublicHoliday(holidayForm.getYear(), holidayForm.getCountryCode());
+        List<Holiday> list = holidayRepository.findByDate(holidayForm.getDate());
+        if (exist(holidayForm)) {
+            throw new HolidayNotFoundException(holidayForm);
+        } else {
+            Holiday holiday = Holiday.builder()
+                    .id(holidayForm.getId())
+                    .year(holidayForm.getYear())
+                    .contryCode(holidayForm.getCountryCode())
+                    .date(holidayForm.getDate())
+                    .cityName(holidayForm.getCity())
+                    .holidayName(holidayForm.getHolidayName())
+                    .build();
 //
-//
-//	}
-	public boolean exist(HolidayForm holidayForm) {
-		String year = holidayForm.getYear();
-		String country = holidayForm.getCountry();
-		return holidayAdapter.getPublicHoliday(year, country).stream()
-				.anyMatch(h -> h.getDate().equals(holidayForm.getDate()));
-//		if(holidayAdapter.getPublicHoliday(year, country))
-////				.stream().anyMatch(h -> h.getDate().equals(holiday.getDate()))){
-//			return false;
-//		}
-//			return true;
-	}
+//            holidayRepository.save(holiday);
+//            return HolidayMapper.toHolidayDto(holiday);
+            return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
+        }
+    }
+
+    public boolean exist(HolidayForm holidayForm) {
+        String year = holidayForm.getYear();
+        String country = holidayForm.getCountryCode();
+        return holidayAdapter.getPublicHoliday(year, country).stream()
+                .anyMatch(h -> h.getDate().equals(holidayForm.getDate()));
+    }
 
 //	public List<PublicHoliday> teste(HolidayForm hForm){
 //		String year = hForm.getYear();

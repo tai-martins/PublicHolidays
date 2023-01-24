@@ -1,7 +1,9 @@
 package br.inatel.idp.PublicHolidays.model.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import br.inatel.idp.PublicHolidays.model.rest.PublicHoliday;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +21,7 @@ public class HolidayDto {
 	private LocalDate date;
 	private String countryCode;
 	private String year;
+
 
 	public LocalDate getDate() {
 		return date;
