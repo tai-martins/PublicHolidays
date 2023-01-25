@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import br.inatel.idp.PublicHolidays.exception.HolidayAlreadyExistsException;
 import br.inatel.idp.PublicHolidays.exception.HolidayNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class HolidayService {
         return HolidayMapper.toHolidayDtoLits(holidayRepository.findByCityName(cityName));
     }
 
-    public List<Holiday> findHolidayByDate(LocalDate date) {
+    public List<Holiday> findHolidayByDate(String date) {
         List<Holiday> list = holidayRepository.findByDate(date);
         return list;
     }
@@ -44,7 +45,11 @@ public class HolidayService {
 
         if (exist(holiday)) {
             throw new HolidayNotFoundException(holiday);
-        } else {
+        } else if(holidayRepository.findByDate(holiday.getDate())!=null &
+                holidayRepository.findByCityName(holiday.getCityName())!=null){
+            throw new HolidayAlreadyExistsException(holiday);
+        }
+        else {
             return HolidayMapper.toHolidayDto(holidayRepository.save(holiday));
         }
     }

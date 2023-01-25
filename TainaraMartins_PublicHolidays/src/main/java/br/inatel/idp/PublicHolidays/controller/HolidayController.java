@@ -32,7 +32,7 @@ public class HolidayController {
 	}
 	
 	@GetMapping("/date")
-	public ResponseEntity<List<Holiday>> dateHolidays(@RequestParam("date") @PathVariable LocalDate date){
+	public ResponseEntity<List<Holiday>> dateHolidays(@RequestParam("date") @PathVariable String date){
 		return ResponseEntity.ok().body(holidayService.findHolidayByDate(date));
 	}
 	
@@ -40,11 +40,5 @@ public class HolidayController {
     public ResponseEntity<?> addHoliday(@RequestBody @Valid HolidayDto holidayDto) throws Exception {
         return ResponseEntity.created(null).body(holidayService.saveHoliday(holidayDto));
     }
-
-//	@PostMapping
-//	public ResponseEntity<?> teste(@RequestBody HolidayForm hForm){
-//		return ResponseEntity.ok(holidayService.teste(hForm));
-//	}
-
 	
 }

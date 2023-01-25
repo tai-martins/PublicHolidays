@@ -31,12 +31,12 @@ public class Holiday {
 	private String holidayName;
 	@NotNull
 	@JsonFormat(pattern = "YYYY-MM-DD")
-    private LocalDate date;
+    private String date;
 
 	private String countryCode;
 	private String year;
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 }

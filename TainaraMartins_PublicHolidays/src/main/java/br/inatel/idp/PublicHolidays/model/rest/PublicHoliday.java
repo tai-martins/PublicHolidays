@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PublicHoliday {
 
-	private LocalDate date;
+	private String date;
 	private String localName;
 	private String name;
 	private String countryCode;
 	private String type;
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 }

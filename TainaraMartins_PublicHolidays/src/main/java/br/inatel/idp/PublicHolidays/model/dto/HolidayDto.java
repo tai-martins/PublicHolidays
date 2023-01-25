@@ -18,12 +18,12 @@ public class HolidayDto {
 	private int id;
 	private String cityName;
 	private String holidayName;
-	private LocalDate date;
+	private String date;
 	private String countryCode;
 	private String year;
 
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 }

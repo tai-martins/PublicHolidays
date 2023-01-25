@@ -14,6 +14,6 @@ public interface HolidayRepository extends JpaRepository<Holiday, Integer>{
 
 	List<Holiday> findByCityName(String cityName);
 	
-	List<Holiday> findByDate(LocalDate date);
+	List<Holiday> findByDate(String date);
 	
 }
