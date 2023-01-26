@@ -63,6 +63,7 @@ public class ServiceTest {
                 .build();
 
         holidayList.add(holiday);
+        holidayDtoList.add(holidayDto);
     }
 
     @Test

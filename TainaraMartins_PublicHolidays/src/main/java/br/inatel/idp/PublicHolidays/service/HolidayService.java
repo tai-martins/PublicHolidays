@@ -42,11 +42,13 @@ public class HolidayService {
 
     public HolidayDto saveHoliday(@Valid HolidayDto holidayDto) throws Exception {
         Holiday holiday = HolidayMapper.toHoliday(holidayDto);
+        List<Holiday> verifyDate = holidayRepository.findByDate(holidayDto.getDate());
+        List<Holiday> verifyLocal = holidayRepository.findByCityName(holidayDto.getCityName());
 
         if (exist(holiday)) {
             throw new HolidayNotFoundException(holiday);
-        } else if(holidayRepository.findByDate(holiday.getDate())!=null &
-                holidayRepository.findByCityName(holiday.getCityName())!=null){
+        }
+        else if((verifyDate.size() != 0) && (verifyLocal.size() != 0)){
             throw new HolidayAlreadyExistsException(holiday);
         }
         else {
@@ -54,6 +56,11 @@ public class HolidayService {
         }
     }
 
+    /**
+     * Method that verif exist holiday
+     * @param holiday
+     * @return
+     */
     public boolean exist(Holiday holiday) {
         String year = holiday.getYear();
         String country = holiday.getCountryCode();
