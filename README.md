@@ -27,8 +27,11 @@ Register at [rapid API PublicHoliday](https://rapidapi.com/theapiguy/api/public-
 ### End-Points
 
 GET http://localhost:8088/holiday
+
 GET http://localhost:8088/holiday/local?cityName= - get a holiday by local
+
 GET http://localhost:8088/holiday/date?date= - get a holiday by date
+
 POST http://localhost:8088/holiday
 
 
