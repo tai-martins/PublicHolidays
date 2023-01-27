@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bootdb
+    networks:
+      - inatel
+
+  publicholidays:
+    image: public-holidays
+    container_name: public-holidays
+    ports:
+      - 8088:8088
+    environment:
+      - MYSQL_CONTAINER=mysql
+      - EXTERNALAPI-KEY=6ea09f8b4bmshd2a5e8e64fbee13p1988f7jsnd9643627b2a2
+      - EXTERNALAPI-URL=https://public-holiday.p.rapidapi.com/
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - inatel
+    depends_on:
+      - mysql
+
+networks:
+  inatel:
+    driver: bridge

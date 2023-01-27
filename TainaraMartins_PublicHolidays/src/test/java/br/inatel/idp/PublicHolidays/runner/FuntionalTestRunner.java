@@ -5,7 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"classpath:features/"}, glue = {"br.inatel.idp.PublicHolidays.step", "br.inatel.idp.PublicHolidays.config"})
+@CucumberOptions(features = {"src/test/resources/feature"}, glue = {"br.inatel.idp.PublicHolidays.step"})
+
 public class FuntionalTestRunner {
 
 }

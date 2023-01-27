@@ -21,9 +21,6 @@ import org.springframework.web.reactive.function.client.WebClientException;
 @Service
 public class HolidayAdapter {
 
-	@Value("${server.host}")
-	private String serverHost;
-
 	@Value("${X-RapidAPI-Host}")
 	private String holidayHost;
 
