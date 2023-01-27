@@ -8,3 +8,12 @@ This work consists an application that register holidays
 
 #### Developed by 👩
 Tainara Martins
+
+### Necessary tools
+
+- Java
+- Maven
+- Docker
+- Postman
+- IntelliJ
+- Git
