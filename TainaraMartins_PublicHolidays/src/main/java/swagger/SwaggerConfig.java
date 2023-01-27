@@ -1,4 +1,4 @@
-package br.inatel.idp.PublicHolidays.swagger;
+package swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
