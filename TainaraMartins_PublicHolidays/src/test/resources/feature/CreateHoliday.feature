@@ -2,11 +2,15 @@
 @CreateHoliday
 Feature: Create a holiday
 
-  Scenario Outline: Sucessfully create a new holiday
-    When I sucessfully create a new holiday with local <cityName> and name <holidayName> and date "<date>" and contry <countryCode> and year "<year>"
-    Then the status code must be 201
-    And the id must be not null in the response
+  Scenario: Sucessfully create a new holiday
+    Given "Santa Rita" is not yet registered
+    Given "Santa Rita" is provided as cityName
+    And "2023-05-22" is provided as date
+    When post a new holiday
+    Then the statusCode must be "201"
+    And the holidayName should be "Padroeira"
+    And the countryCode should be "BR"
+    And the year should be "2023"
 
-    Examples:
-    | cityName      | holidayName          | date       | countryCode | year      |
-    | Heliodora     | Padroeira            | 2023-09-06 | BR          | 2023      |
+
+
