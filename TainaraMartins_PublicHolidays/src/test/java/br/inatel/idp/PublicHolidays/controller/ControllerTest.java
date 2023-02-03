@@ -18,7 +18,7 @@ public class ControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private WebTestClient webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
+    private WebTestClient webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:8088").build();
 
     @Test
     public void givenAnCorrectGetRequestListAllHolidays_whenCallGetMethod_shouldReturn200Code()throws Exception{

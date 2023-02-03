@@ -24,8 +24,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 
@@ -81,7 +79,8 @@ public class ServiceTest {
     }
     @Test
     public void givenListHolidaysByInvalidLocal_whenGetHolidaysByInvalidLocal_shouldReturnHolidayDtoList() {
-        when(holidayRepository.findByCityName("Pouso Alegre")).thenReturn(Arrays.asList(holiday));
+        //when(holidayRepository.findByCityName("Pouso Alegre")).thenReturn(Arrays.asList(holiday));
+        holidayRepository.findByCityName("Pouso Alegre");
         List<HolidayDto> holidayDtoList = holidayService.findHolidayByLocal("Santa Rita");
 
         assertThat(holidayDtoList.size()).isEqualTo(0L);
@@ -99,7 +98,8 @@ public class ServiceTest {
 
     @Test
     public void givenListHolidaysByDate_whenGetHolidaysByDate_shouldReturnHolidayDtoList() {
-        when(holidayRepository.findByDate("2023-05-24")).thenReturn(Arrays.asList(holiday));
+        //when(holidayRepository.findByDate("2023-05-24")).thenReturn(Arrays.asList(holiday));
+        holidayRepository.findByDate("2023-05-24");
         List<HolidayDto> holidayDtoList = holidayService.findHoliday();
 
         assertThat(holidayDtoList).isNotNull();

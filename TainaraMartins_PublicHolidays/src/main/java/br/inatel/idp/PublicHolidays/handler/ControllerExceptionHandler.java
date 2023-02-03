@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(HolidayNotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Error holidayNotFoundException(HolidayNotFoundException holidayNotFoundException){
-        return Error.builder().httpStatusCode(HttpStatus.NOT_FOUND).message(holidayNotFoundException.getMessage()).build();
+        return Error.builder().httpStatusCode(HttpStatus.BAD_REQUEST).message(holidayNotFoundException.getMessage()).build();
     }
     @ExceptionHandler(HolidayAlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Error holidayAlreadyExistsException(HolidayAlreadyExistsException holidayAlreadyExistsException){
-        return Error.builder().httpStatusCode(HttpStatus.NOT_FOUND)
+        return Error.builder().httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(holidayAlreadyExistsException.getMessage()).build();
     }
 
